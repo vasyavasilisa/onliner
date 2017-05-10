@@ -2,20 +2,28 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Surefire suite" duration-ms="30611" started-at="2017-05-08T19:43:45Z" finished-at="2017-05-08T19:44:15Z">
+  <suite name="Suite1" duration-ms="63443" started-at="2017-05-10T00:46:32Z" finished-at="2017-05-10T00:47:35Z">
     <groups>
     </groups>
-    <test name="Surefire test" duration-ms="30611" started-at="2017-05-08T19:43:45Z" finished-at="2017-05-08T19:44:15Z">
-      <class name="OnlinerTest">
-        <test-method status="PASS" signature="getBrouser()[pri:0, instance:OnlinerTest@42e26948]" name="getBrouser" is-config="true" duration-ms="4248" started-at="2017-05-08T22:43:45Z" finished-at="2017-05-08T22:43:49Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getBrouser -->
-        <test-method status="PASS" signature="Onliner_shouldWork()[pri:0, instance:OnlinerTest@42e26948]" name="Onliner_shouldWork" duration-ms="26326" started-at="2017-05-08T22:43:49Z" finished-at="2017-05-08T22:44:15Z">
+    <test name="Onliner" duration-ms="63443" started-at="2017-05-10T00:46:32Z" finished-at="2017-05-10T00:47:35Z">
+      <class name="onliner.tests.OnlinerTest">
+        <test-method status="PASS" signature="Onliner_shouldWork(java.lang.String, java.lang.String)[pri:0, instance:onliner.tests.OnlinerTest@26653222]" name="Onliner_shouldWork" duration-ms="63300" started-at="2017-05-10T03:46:32Z" finished-at="2017-05-10T03:47:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[vasilisademuanova2700@mail.ru]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[123456]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Onliner_shouldWork -->
-      </class> <!-- OnlinerTest -->
-    </test> <!-- Surefire test -->
-  </suite> <!-- Surefire suite -->
+      </class> <!-- onliner.tests.OnlinerTest -->
+    </test> <!-- Onliner -->
+  </suite> <!-- Suite1 -->
 </testng-results>
