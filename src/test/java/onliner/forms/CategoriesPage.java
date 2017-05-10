@@ -13,9 +13,6 @@ public class CategoriesPage {
 
     private final WebDriver driver;
     By textLinkLocator=By.linkText("Новости");
-
-
-
     By caption= By.className("schema-header__title");
 
     public CategoriesPage(WebDriver driver) {
@@ -24,14 +21,6 @@ public class CategoriesPage {
 
     }
 
-   /* public boolean isRightCategory(){
-        boolean enable=driver.findElement(caption).isEnabled();
-        if(!enable){
-            driver.manage().timeouts().implicitlyWait(1000, TimeUnit.SECONDS);
-        }
-
-        return driver.findElement(caption).isEnabled();
-    }*/
 
     public String getUrl(){
         try {

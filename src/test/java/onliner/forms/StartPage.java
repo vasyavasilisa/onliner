@@ -26,8 +26,10 @@ public class StartPage {
     By enterButtonLocator=By.cssSelector(".auth-bar__item");
     By exit=By.xpath("//ul[@class='user-bar cfix']/li/a[@class='exit']");
     By classPopThemes = By.cssSelector(".project-navigation__item");
-   /* By enterLocator=By.cssSelector(".auth-bar__item");*/
-    private String urlOfRandTheme;
+   /* By urlLocator=By.tagName("a");*/
+    String hrefAttribute="href";
+    By spanThemeClass=By.cssSelector(".project-navigation__sign");
+    private String textOfRandTheme;
     private int randDigit;
 
     private final WebDriver driver;
@@ -45,9 +47,9 @@ public class StartPage {
 
     public void clickOnEnter(){
 
-        Actions action1 = new Actions(driver);
+       /* Actions action1 = new Actions(driver);
         WebElement elem1 = driver.findElement(By.className("_u"));
-        action1.moveToElement(elem1).build().perform();
+        action1.moveToElement(elem1).build().perform();*/
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(enterButtonLocator));
@@ -55,8 +57,7 @@ public class StartPage {
         Actions action = new Actions(driver);
         WebElement elem = driver.findElement(enterButtonLocator);
        elem.click();
-        //action.moveToElement(elem).build().perform();
-        //driver.findElement(enterButtonLocator).click();
+
 
     }
 
@@ -87,35 +88,34 @@ public class StartPage {
     public void setRandDigit(int randDigit) {
         this.randDigit = randDigit;
     }
-    public String getUrlOfRandTheme(){
-        return urlOfRandTheme;
+    public String getTextOfRandTheme(){
+        return textOfRandTheme;
     }
 
-    public void setUrlOfRandTheme(String urlOfRandTheme) {
-        this.urlOfRandTheme = urlOfRandTheme;
+    public void setTextOfRandTheme(String textOfRandTheme) {
+        this.textOfRandTheme = textOfRandTheme;
     }
-    public String findUrlOfRandTheme(){
-       return getPopThemes().get( randDigit).findElement(By.tagName("a")).getAttribute("href");
-    }
+
+  /*  public String findUrlOfRandTheme(){
+       return getPopThemes().get( randDigit).findElement(urlLocator).getAttribute(hrefAttribute);
+    }*/
+
     public CategoriesPage clickOnRandomTheme(){
         generateRandDigit();
         List<WebElement> webElementList=getPopThemes();
-        setUrlOfRandTheme(findUrlOfRandTheme());
+       // WebElement elem = getPopThemes().get(randDigit);
+
+       // String spanClass=getPopThemes().get(randDigit).findElement(urlLocator).getAttribute(hrefAttribute);
+        textOfRandTheme=getPopThemes().get(randDigit).findElement(spanThemeClass).getText();
         WebDriverWait wait = new WebDriverWait(driver, 10);
-         wait.until(ExpectedConditions.elementToBeClickable(webElementList.get( randDigit)));
+        wait.until(ExpectedConditions.elementToBeClickable(webElementList.get( randDigit)));
         webElementList.get( randDigit).click();
         return new CategoriesPage(driver);
     }
 
 
     public void findOpinions() throws IOException {
-     //   driver.manage().timeouts().setScriptTimeout(100, TimeUnit.SECONDS);
-       // driver.manage().timeouts().implicitlyWait(15000, TimeUnit.MILLISECONDS);
-        /*try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
+
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.urlToBe("https://www.onliner.by/"));
         System. out.println(driver.getCurrentUrl());
@@ -136,13 +136,11 @@ public class StartPage {
                 }
             }
         }
-       List<String> data = new ArrayList<>();
-     //  System.out.println(nameClass)ж
-        List<WebElement> webElementListOpinions =  driver.findElements
-              //  (By.cssSelector(".b-opinions-main-2__text"));
+             List<String> data = new ArrayList<>();
+            List<WebElement> webElementListOpinions =  driver.findElements
                 (By.cssSelector("."+nameClass+""));
        for(WebElement webElement:webElementListOpinions){
-           // System.out.println(webElement.getText());
+
             data.add(webElement.getText());
         }
         Path path = Paths.get("", "opinions.csv");
@@ -151,17 +149,12 @@ public class StartPage {
 
 
     public StartPage logout(){
-        /*try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        // driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-        WebDriverWait wait1 = new WebDriverWait(driver, 10);
+
+       /* WebDriverWait wait1 = new WebDriverWait(driver, 10);
         wait1.until(ExpectedConditions.elementToBeClickable(By.className("_u")));
         Actions action1 = new Actions(driver);
         WebElement elem1 = driver.findElement(By.className("_u"));
-        action1.moveToElement(elem1).build().perform();
+        action1.moveToElement(elem1).build().perform();*/
         WebDriverWait wait = new WebDriverWait(driver, 10);
        wait.until(ExpectedConditions.elementToBeClickable(exit));
         String attr= driver.findElement(exit).getAttribute("href");
@@ -169,15 +162,7 @@ public class StartPage {
         Actions action = new Actions(driver);
         WebElement elem = driver.findElement(exit);
         action.doubleClick(elem).build().perform();
-       // action.moveToElement(elem).click();
-       // action.perform();
-       /* WebElement linkExit = driver.findElement(exit);
-        System.out.print(linkExit.getText());
-        linkExit.click();*/
-       /* WebElement text = driver.findElement(By.cssSelector(".b-main-navigation__link"));
-        text.click();*/
-      /*  Actions builder = new Actions(driver);
-        builder.doubleClick(linkExit).build().perform();*/
+
         return this;
     }
 

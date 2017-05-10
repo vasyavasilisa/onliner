@@ -3,6 +3,7 @@ package framework;
 import framework.services.PropertyService;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,8 +26,7 @@ public class ChromeFactory extends BrowserFactory {
 
     private ChromeFactory() {
         PropertyService propertyService = new PropertyService();
-
-        System.setProperty(CHROME_DRIVER_NAME, propertyService.readProperties().getProperty(DRIVER_LOCATION_KEY));
+        System.setProperty(CHROME_DRIVER_NAME,  propertyService.readProperties().getProperty(DRIVER_LOCATION_KEY));
 
     }
 

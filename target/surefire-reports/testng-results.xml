@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite1" duration-ms="63443" started-at="2017-05-10T00:46:32Z" finished-at="2017-05-10T00:47:35Z">
+  <suite name="Suite1" duration-ms="44900" started-at="2017-05-10T09:55:12Z" finished-at="2017-05-10T09:55:56Z">
     <groups>
     </groups>
-    <test name="Onliner" duration-ms="63443" started-at="2017-05-10T00:46:32Z" finished-at="2017-05-10T00:47:35Z">
+    <test name="Onliner" duration-ms="44900" started-at="2017-05-10T09:55:12Z" finished-at="2017-05-10T09:55:56Z">
       <class name="onliner.tests.OnlinerTest">
-        <test-method status="PASS" signature="Onliner_shouldWork(java.lang.String, java.lang.String)[pri:0, instance:onliner.tests.OnlinerTest@26653222]" name="Onliner_shouldWork" duration-ms="63300" started-at="2017-05-10T03:46:32Z" finished-at="2017-05-10T03:47:35Z">
+        <test-method status="PASS" signature="Onliner_shouldWork(java.lang.String, java.lang.String)[pri:0, instance:onliner.tests.OnlinerTest@27efef64]" name="Onliner_shouldWork" duration-ms="44852" started-at="2017-05-10T12:55:12Z" finished-at="2017-05-10T12:55:56Z">
           <params>
             <param index="0">
               <value>
