@@ -22,9 +22,7 @@ import java.util.Properties;
  */
 public class OnlinerTest {
 
-    private static final String MAINPAGE_URL_KEY ="main_page_url";
-    private String BROWSER_TYPE_KEY = "brouser_type";
-    private  WebDriver driver;
+
 
 
 
@@ -34,13 +32,12 @@ public class OnlinerTest {
 
         CommonFunctions commonFunctions = new CommonFunctions();
         Properties properties = commonFunctions.readProperties();
-        String br = properties.getProperty(BROWSER_TYPE_KEY);
-        driver= BrowserFactory.getFactory(br).getDriver();
-        driver.manage().window().maximize();
-        String mainPage = properties.getProperty(MAINPAGE_URL_KEY);
-        driver.navigate().to(mainPage);
+        String br = properties.getProperty("brouser_type");
+        WebDriver driver= BrowserFactory.getFactory(br).getDriver();
+        String mainPage = properties.getProperty("main_page_url");
 
         StartPage startPage= new StartPage(driver);
+        startPage.navigateToMainPage(mainPage);
         Assert.assertEquals(startPage.getUrl(),mainPage);
         startPage.clickOnEnter();
 
@@ -55,6 +52,8 @@ public class OnlinerTest {
         startPage.findAndSaveOpinions();
         startPage.logout();
         Assert.assertTrue(startPage.isEnterExist());
+
+        startPage.closeBrowser();
 
 
     }

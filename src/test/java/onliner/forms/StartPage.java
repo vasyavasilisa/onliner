@@ -37,6 +37,11 @@ public class StartPage {
 
     }
 
+    public void navigateToMainPage(String mainPageUrl){
+        driver.manage().window().maximize();
+        driver.navigate().to(mainPageUrl);
+    }
+
     public String getUrl(){
         return driver.getCurrentUrl();
 
@@ -53,6 +58,13 @@ public class StartPage {
 
     }
 
+
+    /** Метод проверяет, имеется ли на странице
+     * элемент - кнопка Выход
+     * Если она есть, то пользователь
+     * успешно авторизировался
+     * @return
+     */
     public boolean isExitExist(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(exitLocator));
@@ -65,6 +77,11 @@ public class StartPage {
     }
 
 
+    /** Метод генерирует случайное число от 0 до длины списка тем
+     * до тех пор, пока тема со сгенеренным индексом не будет видна,
+     * так как на драйвер находит в html доркументе 15 тем, а видны 12
+     * @return
+     */
     public int generateRandDigitForTheme(){
         int size=getPopThemes().size();
         int max=size;
@@ -93,6 +110,12 @@ public class StartPage {
     }
 
 
+    /** Метод сначала получает все элементы страницы в виде строки,
+     * затем вызывает метод по поиску классов для элементов,
+     * содержащих мнения, затем получает только название мнений, заносит их в список
+     * и вызывает метод по записи списка в csv файл
+     *
+     */
     public void findAndSaveOpinions() {
 
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -119,13 +142,26 @@ public class StartPage {
         Actions action = new Actions(driver);
         WebElement elem = driver.findElement(exitLocator);
         action.doubleClick(elem).build().perform();
+     /*  wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(exitLocator));*/
 
     }
 
+    /** Метод проверяет, есть ли на странице элемент -
+     * кнопка Вход
+     *
+     * @return
+     */
     public boolean isEnterExist(){
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            wait.until(ExpectedConditions.presenceOfElementLocated(enterButtonLocator));
+        WebDriverWait  wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(enterButtonLocator));
             return driver.findElement(enterButtonLocator).isEnabled();
+    }
+
+
+    public void closeBrowser(){
+       // this.driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+        driver.quit();
     }
 
 }

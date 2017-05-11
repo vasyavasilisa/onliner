@@ -30,12 +30,12 @@ public class FirefoxFactory extends BrowserFactory {
     }
 @Override
     public FirefoxDriver getDriver() {
-    File pathToBinary = new File("C:\\Users\\USER\\Desktop\\FirefoxPortable\\App\\Firefox\\firefox.exe");
+   /* File pathToBinary = new File("C:\\Users\\USER\\Desktop\\FirefoxPortable\\App\\Firefox\\firefox.exe");
     FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
     FirefoxProfile firefoxProfile = new FirefoxProfile();
     firefoxProfile.setPreference("webdriver.load.strategy","unstable");
-    FirefoxOptions options= new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);
-       return new FirefoxDriver(options);
+    FirefoxOptions options= new FirefoxOptions().setBinary(ffBinary).setProfile(firefoxProfile);*/
+       return new FirefoxDriver(/*options*/);
     }
 
 

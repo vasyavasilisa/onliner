@@ -38,6 +38,14 @@ public class CommonFunctions {
         return property;
     }
 
+    /**
+     *  Метод с помощью регулярного выражения ищет
+     *  названия классов для элементов с мнениями.
+     *  Эти классы отличаются только окончанием.
+     *  В коллекцию заносятся только уникальные названия классов
+     * @param pageSourse
+     * @return
+     */
     public Set findClassesForOpinions(String pageSourse){
         Pattern p = Pattern.compile("([b]\\-[a-z_2-]+\\_(green|blue|red))");
         Matcher m = p.matcher(pageSourse);

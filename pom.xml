@@ -47,9 +47,6 @@
                     <suiteXmlFiles>
                         <suitexmlfile>src/test/resources/testng.xml</suitexmlfile>
                     </suiteXmlFiles>
-                    <!--suitexmlfiles>
-                        <suitexmlfile>testng.xml</suitexmlfile>
-                    </suitexmlfiles-->
 
                     <properties>
 
