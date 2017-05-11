@@ -3,18 +3,18 @@ package onliner.tests;
 
 
 import framework.BrowserFactory;
-import framework.services.PropertyService;
+import framework.services.CommonFunctions;
 import onliner.forms.CategoriesPage;
 import onliner.forms.LoginPage;
 import onliner.forms.StartPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.BrowserType;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
 import java.io.IOException;
+import java.util.Properties;
 
 
 /**
@@ -23,8 +23,8 @@ import java.io.IOException;
 public class OnlinerTest {
 
     private static final String MAINPAGE_URL_KEY ="main_page_url";
-    private  WebDriver driver=null;
     private String BROWSER_TYPE_KEY = "brouser_type";
+    private  WebDriver driver;
 
 
 
@@ -32,22 +32,29 @@ public class OnlinerTest {
    @Test
     public void Onliner_shouldWork(String login, String password) throws IOException {
 
-        PropertyService propertyService = new PropertyService();
-       String br = propertyService.readProperties().getProperty(BROWSER_TYPE_KEY);
+        CommonFunctions commonFunctions = new CommonFunctions();
+        Properties properties = commonFunctions.readProperties();
+        String br = properties.getProperty(BROWSER_TYPE_KEY);
         driver= BrowserFactory.getFactory(br).getDriver();
         driver.manage().window().maximize();
-        String mainPage = propertyService.readProperties().getProperty(MAINPAGE_URL_KEY);
+        String mainPage = properties.getProperty(MAINPAGE_URL_KEY);
         driver.navigate().to(mainPage);
+
         StartPage startPage= new StartPage(driver);
-        Assert.assertEquals(startPage.isGetRightUrl(),true);///////////////Главная страница открылась
+        Assert.assertEquals(startPage.getUrl(),mainPage);
         startPage.clickOnEnter();
+
         LoginPage loginPage = new LoginPage(driver);
-        Assert.assertEquals(loginPage.loginAs(login,password).isExitExist(),true);///////Успешная авторизация
-        CategoriesPage categoriesPage =  startPage.clickOnRandomTheme();
-        Assert.assertEquals(categoriesPage.getUrl(),startPage.getUrlOfRandTheme());
-        startPage=categoriesPage.returnOnStartPage();
-        startPage.findOpinions();
-        Assert.assertTrue(startPage.logout().isEnterExist());
+        loginPage.login(login,password);
+        Assert.assertEquals(startPage.isExitExist(),true);
+        startPage.clickOnRandomTheme();
+
+        CategoriesPage categoriesPage = new CategoriesPage(driver);
+        Assert.assertEquals(categoriesPage.getCategoryName(),startPage.getTextOfRandTheme());
+        categoriesPage.returnOnStartPage();
+        startPage.findAndSaveOpinions();
+        startPage.logout();
+        Assert.assertTrue(startPage.isEnterExist());
 
 
     }

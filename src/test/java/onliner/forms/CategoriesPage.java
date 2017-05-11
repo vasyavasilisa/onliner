@@ -1,17 +1,27 @@
 package onliner.forms;
 
+
+
+import com.google.common.base.Function;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+
+
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * Created by USER on 08.05.2017.
  */
 public class CategoriesPage {
 
-    private final WebDriver driver;
+    private WebDriver driver;
     By textLinkLocator=By.linkText("Новости");
     By caption= By.className("schema-header__title");
 
@@ -22,20 +32,33 @@ public class CategoriesPage {
     }
 
 
-    public String getUrl(){
-        try {
-            Thread.sleep(8000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return driver.getCurrentUrl();
+    public String getCategoryName(){
+        Wait wait = new FluentWait(driver)
+                .withTimeout(30, SECONDS)
+                .pollingEvery(5, SECONDS)
+                .ignoring(NoSuchElementException.class);
+
+        WebElement foo =(WebElement) wait.until(new Function<WebDriver,WebElement>() {
+
+            public WebElement apply(WebDriver driver) {
+
+                return driver.findElement(caption);
+
+            }
+
+        });
+
+            return foo.getText();
     }
 
-public StartPage returnOnStartPage() {
-    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+public void returnOnStartPage() {
+   // driver.navigate().back();
+    //driver.navigate().refresh();
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    wait.until(ExpectedConditions.presenceOfElementLocated(textLinkLocator));
     WebElement element = driver.findElement(textLinkLocator);
     element.click();
-    return new StartPage(driver);
+
 }
 
 

@@ -1,13 +1,7 @@
 package framework;
 
-import framework.services.PropertyService;
+import framework.services.CommonFunctions;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 
 /**
  * Created by USER on 09.05.2017.
@@ -25,8 +19,8 @@ public class ChromeFactory extends BrowserFactory {
     }
 
     private ChromeFactory() {
-        PropertyService propertyService = new PropertyService();
-        System.setProperty(CHROME_DRIVER_NAME,  propertyService.readProperties().getProperty(DRIVER_LOCATION_KEY));
+        CommonFunctions commonFunctions = new CommonFunctions();
+        System.setProperty(CHROME_DRIVER_NAME,  commonFunctions.readProperties().getProperty(DRIVER_LOCATION_KEY));
 
     }
 

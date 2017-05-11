@@ -1,8 +1,6 @@
 package framework;
 
-import framework.exceptions.UnSupportedStoradgeTypeException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by USER on 09.05.2017.
@@ -20,7 +18,7 @@ public abstract class BrowserFactory {
                 return FirefoxFactory.getInstance();
             }
         }
-        throw new UnSupportedStoradgeTypeException();
+        throw new RuntimeException();
     }
 
 }
